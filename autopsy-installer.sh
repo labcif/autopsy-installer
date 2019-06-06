@@ -45,7 +45,7 @@ echo "#####################################"
 echo "# Installing dependencies..."
 echo "#####################################"
     
-    echo "[INFO ] Installing some tools..."
+    echo "[INFO.] Installing some tools..."
     sudo apt install -y git testdisk ewf-tools xmount fdupes 2>&1
     echo "Done."
     echo ""
@@ -54,9 +54,9 @@ echo "#####################################"
     cd /tmp/github
     
     if [ -e /usr/local/bin/oracle-java-installer ]; then
-        echo "[INFO ] The file \"oracle-java-installer\" already exists."
+        echo "[INFO.] The file \"oracle-java-installer\" already exists."
     else
-        echo "[INFO ] Installing \"oracle-java-installer\"..."
+        echo "[INFO.] Installing \"oracle-java-installer\"..."
         git clone https://github.com/labcif/oracle-java-installer.git
         cd /tmp/github/oracle-java-installer
         sudo ./install.sh
@@ -66,9 +66,9 @@ echo "#####################################"
     
     # optional, but cool :)
     if [ -e /usr/local/bin/b64sha ]; then
-        echo "[INFO ] The file \"b64sha\" already exists."
+        echo "[INFO.] The file \"b64sha\" already exists."
     else
-        echo "[INFO ] Installing \"b64sha\"..."
+        echo "[INFO.] Installing \"b64sha\"..."
         git clone https://github.com/labcif/Base64SHA.git
         cd /tmp/github/Base64SHA
         sudo ./install.sh
@@ -78,7 +78,7 @@ echo "#####################################"
     
     cd $OLD_DIR
     
-    echo "[INFO ] Installing \"$JAVA_FILE\"..."
+    echo "[INFO.] Installing \"$JAVA_FILE\"..."
     if [ -e ./$JAVA_FILE ] ; then
         sudo /usr/local/bin/oracle-java-installer -i $JAVA_FILE 2>&1
         echo "Done."
@@ -90,7 +90,7 @@ echo "#####################################"
         exit
     fi
     
-    echo "[INFO ] Installing \"$SLEUTHKIT_FILE\"..."
+    echo "[INFO.] Installing \"$SLEUTHKIT_FILE\"..."
     if [ -e ./$SLEUTHKIT_FILE ] ; then
         sudo apt install -y ./$SLEUTHKIT_FILE 2>&1
         echo "Done."
@@ -107,7 +107,7 @@ echo "#####################################"
 echo "# Installing AUTOPSY..."
 echo "#####################################"
 
-    echo "[INFO ] Installing \"$AUTOPSY_FILE\"..."
+    echo "[INFO.] Installing \"$AUTOPSY_FILE\"..."
     if [ -e ./$AUTOPSY_FILE ] ; then
         unzip $AUTOPSY_FILE 2>&1
         
@@ -115,6 +115,18 @@ echo "#####################################"
             mv $AUTOPSY_DIR $HOME 2>&1
         fi
         
+        
+        if [ -e ./restart-solr.sh ] ; then
+            echo "[INFO.] Installing \"restart-solr.sh\" script..."
+            cp ./restart-solr.sh $HOME/$AUTOPSY_DIR/autopsy/solr/
+            chmod +x $HOME/$AUTOPSY_DIR/autopsy/solr/restart-solr.sh
+            echo "Done."
+            echo ""
+        else
+            echo "[WARN.] The script \"restart-solr.sh\" is missing!"
+        fi
+        
+        echo "[INFO.] Last checks..."
         cd $HOME/$AUTOPSY_DIR
         chmod +x unix_setup.sh
         ./unix_setup.sh || exit

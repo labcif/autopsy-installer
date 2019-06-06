@@ -127,6 +127,7 @@ echo "#####################################"
         fi
         
         echo "[INFO.] Last checks..."
+        source /etc/profile.d/jdk.sh
         cd $HOME/$AUTOPSY_DIR
         chmod +x unix_setup.sh
         ./unix_setup.sh || exit

@@ -29,7 +29,7 @@ java -DSTOP.PORT=34343 -DSTOP.KEY=jjk#09s -jar start.jar --stop
 echo "Done."
 echo "Wait 20 seconds for the port to be freed..."
 sleep 20
-echo "Solr will start now..."
+echo "Solr will start now with 4GB of RAM..."
 java -Xmx4G -DSTOP.PORT=34343 -DSTOP.KEY=jjk#09s -jar start.jar 2>`date -Iseconds`.log &
 echo "Done."
 echo "You can now use Autopsy."

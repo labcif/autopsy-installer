@@ -100,14 +100,12 @@ echo "#####################################"
     if [ -e ./$SLEUTHKIT_FILE ] ; then
         sudo apt install -y ./$SLEUTHKIT_FILE 2>&1
         echo "Done."
-        echo ""
     else
         echo "[INFO.] Downloading file \"$SLEUTHKIT_FILE\"..."
         wget https://github.com/sleuthkit/sleuthkit/releases/download/$SLEUTHKIT_DIR/$SLEUTHKIT_FILE || exit
         echo "Done."
     fi
     
-echo "Done."
 echo ""
 
 echo "#####################################"
@@ -139,7 +137,11 @@ echo "#####################################"
         echo "[WARN.] The script \"restart-solr.sh\" is missing!"
     fi
     
-    echo "[INFO.] Last checks..."
+
+echo "#####################################"
+echo "# Last checks..."
+echo "#####################################"    
+    
     source /etc/profile.d/jdk.sh
     cd $HOME/$AUTOPSY_DIR
     chmod +x unix_setup.sh

@@ -109,7 +109,7 @@ echo "#####################################"
 
     echo "[INFO.] Installing \"$AUTOPSY_FILE\"..."
     if [ -e ./$AUTOPSY_FILE ] ; then
-        unzip $AUTOPSY_FILE 2>&1
+        unzip -f $AUTOPSY_FILE 2>&1
         
         if [ ! -d $HOME/$AUTOPSY_DIR ]; then
             mv $AUTOPSY_DIR $HOME 2>&1

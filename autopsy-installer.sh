@@ -3,7 +3,7 @@
 # DESCRIPTION:
 # 
 #   Basic script to automate the installation of Autopsy and other tools on Ubuntu.
-#   Needs root permissions.
+#   Requests sudo permissions.
 #
 # 
 # Copyright (C) 2019, Miguel Frade
@@ -46,7 +46,7 @@ echo "# Installing dependencies..."
 echo "#####################################"
     
     echo "[INFO ] Installing some tools..."
-    sudo apt install git testdisk ewf-tools xmount fdupes 2>&1
+    sudo apt install -y git testdisk ewf-tools xmount fdupes 2>&1
     echo "Done."
     echo ""
     
@@ -92,7 +92,7 @@ echo "#####################################"
     
     echo "[INFO ] Installing \"$SLEUTHKIT_FILE\"..."
     if [ -e ./$SLEUTHKIT_FILE ] ; then
-        sudo apt install ./$SLEUTHKIT_FILE 2>&1
+        sudo apt install -y ./$SLEUTHKIT_FILE 2>&1
         echo "Done."
         echo ""
     else

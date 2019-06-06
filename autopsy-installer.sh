@@ -27,7 +27,13 @@
 
 # set up some variables
 JAVA_FILE="jdk-8u212-linux-x64.tar.gz"
-SLEUTHKIT_FILE="sleuthkit-java_4.6.5-1_amd64.deb"
+
+# sleuthkit-4.6.5/sleuthkit-java_4.6.5-1_amd64.deb
+SLEUTHKIT_VERSION_MAJOR="4.6.5"
+SLEUTHKIT_VERSION_MINOR="1"
+SLEUTHKIT_DIR="sleuthkit-${SLEUTHKIT_VERSION_MAJOR}"
+SLEUTHKIT_FILE="sleuthkit-java_${SLEUTHKIT_VERSION_MAJOR}-${SLEUTHKIT_VERSION_MINOR}_amd64.deb"
+
 AUTOPSY_VERSION="4.10.0"
 AUTOPSY_FILE="autopsy-$AUTOPSY_VERSION.zip"
 AUTOPSY_DIR="autopsy-$AUTOPSY_VERSION"
@@ -96,8 +102,9 @@ echo "#####################################"
         echo "Done."
         echo ""
     else
-        echo "[ERROR] The file \"$SLEUTHKIT_FILE\" is missing."
-        exit
+        echo "[INFO.] Downloading file \"$SLEUTHKIT_FILE\"..."
+        wget https://github.com/sleuthkit/sleuthkit/releases/download/$SLEUTHKIT_DIR/$SLEUTHKIT_FILE || exit
+        echo "Done."
     fi
     
 echo "Done."
@@ -110,32 +117,34 @@ echo "#####################################"
     echo "[INFO.] Installing \"$AUTOPSY_FILE\"..."
     if [ -e ./$AUTOPSY_FILE ] ; then
         unzip -f $AUTOPSY_FILE 2>&1
+    else
+        echo "[INFO.] Downloading the file \"$AUTOPSY_FILE\"..."
+        wget https://github.com/sleuthkit/autopsy/releases/download/$AUTOPSY_DIR/$AUTOPSY_FILE || exit
+        echo "Done."
+        echo ""
+    fi
         
-        if [ ! -d $HOME/$AUTOPSY_DIR ]; then
-            mv $AUTOPSY_DIR $HOME 2>&1
-        fi
-        
-        
-        if [ -e ./restart-solr.sh ] ; then
-            echo "[INFO.] Installing \"restart-solr.sh\" script..."
-            cp ./restart-solr.sh $HOME/$AUTOPSY_DIR/autopsy/solr/
-            chmod +x $HOME/$AUTOPSY_DIR/autopsy/solr/restart-solr.sh
-            echo "Done."
-            echo ""
-        else
-            echo "[WARN.] The script \"restart-solr.sh\" is missing!"
-        fi
-        
-        echo "[INFO.] Last checks..."
-        source /etc/profile.d/jdk.sh
-        cd $HOME/$AUTOPSY_DIR
-        chmod +x unix_setup.sh
-        ./unix_setup.sh || exit
-        
+    if [ ! -d $HOME/$AUTOPSY_DIR ]; then
+        mv $AUTOPSY_DIR $HOME 2>&1
+    fi
+    
+    
+    if [ -e ./restart-solr.sh ] ; then
+        echo "[INFO.] Installing \"restart-solr.sh\" script..."
+        cp ./restart-solr.sh $HOME/$AUTOPSY_DIR/autopsy/solr/
+        chmod +x $HOME/$AUTOPSY_DIR/autopsy/solr/restart-solr.sh
         echo "Done."
         echo ""
     else
-        echo "[ERROR] The file \"$AUTOPSY_FILE\" is missing."
-        exit
+        echo "[WARN.] The script \"restart-solr.sh\" is missing!"
     fi
+    
+    echo "[INFO.] Last checks..."
+    source /etc/profile.d/jdk.sh
+    cd $HOME/$AUTOPSY_DIR
+    chmod +x unix_setup.sh
+    ./unix_setup.sh || exit
+    
+    echo "Done."
+    echo ""
 

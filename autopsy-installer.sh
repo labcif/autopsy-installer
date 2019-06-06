@@ -122,7 +122,7 @@ echo "#####################################"
         fi
         
         echo "[INFO.] Unziping \"$AUTOPSY_FILE\"..."
-        unzip -f $AUTOPSY_FILE 2>&1
+        unzip -n $AUTOPSY_FILE 2>&1
         mv $AUTOPSY_DIR $HOME 2>&1
         echo "Done."
         echo ""

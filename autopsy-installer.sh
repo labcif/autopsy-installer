@@ -35,7 +35,7 @@ AUTOPSY_DIR="autopsy-$AUTOPSY_VERSION"
 echo "#####################################"
 echo "# Updating the APT database ..."
 echo "#####################################"
-    apt update  2>&1
+    sudo apt update  2>&1
 echo "Done."
 echo ""
 

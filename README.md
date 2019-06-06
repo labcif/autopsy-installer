@@ -3,7 +3,7 @@ Basic script to automate the installation of Autopsy 4.10, Oracle JDK 8 and othe
 
 # Usage
 First, place the following file **inside the same directory** of the `autopsy-installer.sh` script:
-- `jdk-8u212-linux-x64.tar.gz` (requires a login to [download](https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html) since 2019-04-16)
+- the latest version of JDK 8, at the time of this writing was `jdk-8u212-linux-x64.tar.gz` (requires a login to [download](https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html) since 2019-04-16)
 
 Optionally, you may also include these files (if they aren't present the script will download them for you):
 - `sleuthkit-java_4.6.5-1_amd64.deb` ([download](https://github.com/sleuthkit/sleuthkit/releases/download/sleuthkit-4.6.5/sleuthkit-java_4.6.5-1_amd64.deb))

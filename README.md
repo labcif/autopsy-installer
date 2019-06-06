@@ -19,5 +19,10 @@ autopsy-installer.sh  jdk-8u212-linux-x64.tar.gz  restart-solr.sh
 $ ./autopsy-installer.sh
 ```
 
+# Share
+
+Cite as:
+
+Miguel Frade. (2019, June 6). labcif/autopsy-installer. Zenodo. http://doi.org/10.5281/zenodo.3240670 ([BibTeX file](cite.bib))
 
 

@@ -111,31 +111,37 @@ echo ""
 echo "#####################################"
 echo "# Installing AUTOPSY..."
 echo "#####################################"
-
-    echo "[INFO.] Installing \"$AUTOPSY_FILE\"..."
-    if [ -e ./$AUTOPSY_FILE ] ; then
-        unzip -f $AUTOPSY_FILE 2>&1
-    else
-        echo "[INFO.] Downloading the file \"$AUTOPSY_FILE\"..."
-        wget https://github.com/sleuthkit/autopsy/releases/download/$AUTOPSY_DIR/$AUTOPSY_FILE || exit
-        echo "Done."
-        echo ""
-    fi
-        
+    
     if [ ! -d $HOME/$AUTOPSY_DIR ]; then
+
+        if [ ! -e ./$AUTOPSY_FILE ] ; then
+            echo "[INFO.] Downloading the file \"$AUTOPSY_FILE\"..."
+            wget https://github.com/sleuthkit/autopsy/releases/download/$AUTOPSY_DIR/$AUTOPSY_FILE || exit
+            echo "Done."
+            echo ""
+        fi
+        
+        echo "[INFO.] Unziping \"$AUTOPSY_FILE\"..."
+        unzip -f $AUTOPSY_FILE 2>&1
         mv $AUTOPSY_DIR $HOME 2>&1
-    fi
-    
-    
-    if [ -e ./restart-solr.sh ] ; then
-        echo "[INFO.] Installing \"restart-solr.sh\" script..."
-        cp ./restart-solr.sh $HOME/$AUTOPSY_DIR/autopsy/solr/
-        chmod +x $HOME/$AUTOPSY_DIR/autopsy/solr/restart-solr.sh
         echo "Done."
         echo ""
+        
+        if [ -e ./restart-solr.sh ] ; then
+            echo "[INFO.] Installing \"restart-solr.sh\" script..."
+            cp ./restart-solr.sh $HOME/$AUTOPSY_DIR/autopsy/solr/
+            chmod +x $HOME/$AUTOPSY_DIR/autopsy/solr/restart-solr.sh
+            echo "Done."
+        else
+            echo "[WARN.] The script \"restart-solr.sh\" is missing!"
+        fi
+        
     else
-        echo "[WARN.] The script \"restart-solr.sh\" is missing!"
+        echo "[WARN.] \"$HOME/$AUTOPSY_DIR\" already exists!"
     fi
+    
+    echo ""
+    
     
 
 echo "#####################################"
@@ -146,7 +152,5 @@ echo "#####################################"
     cd $HOME/$AUTOPSY_DIR
     chmod +x unix_setup.sh
     ./unix_setup.sh || exit
-    
-    echo "Done."
     echo ""
 

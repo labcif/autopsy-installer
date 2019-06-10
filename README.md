@@ -14,9 +14,9 @@ You may also include these files (if they aren't present the script will downloa
 Then run the script:
 ```bash
 $ ls
-autopsy-installer.sh  jdk-8u212-linux-x64.tar.gz  restart-solr.sh
+autopsy-4.10-installer.sh  jdk-8u212-linux-x64.tar.gz  restart-solr.sh
 
-$ ./autopsy-installer.sh
+$ ./autopsy-4.10-installer.sh
 ```
 
 # Share

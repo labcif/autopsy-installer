@@ -2,7 +2,7 @@
 Basic script to automate the installation of Autopsy 4.10, Oracle JDK 8 and other utilities on Ubuntu.
 
 # Usage
-First, place the following file **inside the same directory** of the `autopsy-installer.sh` script:
+First, place the following file **inside the same directory** of the `autopsy-4.10-installer.sh` script:
 - the latest version of JDK 8, at the time of this writing was `jdk-8u212-linux-x64.tar.gz` (requires a login to [download](https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html) since 2019-04-16)
 
 You may also include these files (if they aren't present the script will download them for you):

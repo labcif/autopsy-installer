@@ -127,14 +127,15 @@ echo "#####################################"
         echo "Done."
         echo ""
         
-        if [ -e ./restart-solr.sh ] ; then
-            echo "[INFO.] Installing \"restart-solr.sh\" script..."
-            cp ./restart-solr.sh $HOME/$AUTOPSY_DIR/autopsy/solr/
-            chmod +x $HOME/$AUTOPSY_DIR/autopsy/solr/restart-solr.sh
-            echo "Done."
-        else
-            echo "[WARN.] The script \"restart-solr.sh\" is missing!"
-        fi
+# # no longer needed:
+#         if [ -e ./restart-solr.sh ] ; then
+#             echo "[INFO.] Installing \"restart-solr.sh\" script..."
+#             cp ./restart-solr.sh $HOME/$AUTOPSY_DIR/autopsy/solr/
+#             chmod +x $HOME/$AUTOPSY_DIR/autopsy/solr/restart-solr.sh
+#             echo "Done."
+#         else
+#             echo "[WARN.] The script \"restart-solr.sh\" is missing!"
+#         fi
         
     else
         echo "[WARN.] \"$HOME/$AUTOPSY_DIR\" already exists!"

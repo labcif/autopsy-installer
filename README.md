@@ -1,5 +1,5 @@
 # autopsy-installer
-Basic script to automate the installation of Autopsy 4.10, Oracle JDK 8 and other utilities on Ubuntu.
+Basic script to automate the installation of Autopsy 4.11, Oracle JDK 8 and other utilities on Ubuntu.
 
 # Usage
 First, place the following file **inside the same directory** of the `autopsy-4.11-installer.sh` script:

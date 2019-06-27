@@ -28,7 +28,7 @@
 # set up some variables
 JAVA_FILE="jdk-8u212-linux-x64.tar.gz"
 
-# sleuthkit-4.6.5/sleuthkit-java_4.6.5-1_amd64.deb
+# sleuthkit-4.6.6/sleuthkit-java_4.6.6-1_amd64.deb
 SLEUTHKIT_VERSION_MAJOR="4.6.6"
 SLEUTHKIT_VERSION_MINOR="1"
 SLEUTHKIT_DIR="sleuthkit-${SLEUTHKIT_VERSION_MAJOR}"

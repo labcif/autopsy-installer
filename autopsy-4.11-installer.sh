@@ -89,8 +89,8 @@ echo "#####################################"
         sudo /usr/local/bin/oracle-java-installer -i $JAVA_FILE 2>&1
         echo "Done."
         echo ""
-        /usr/local/bin/oracle-java-installer -s
-        echo ""
+#         /usr/local/bin/oracle-java-installer -s
+#         echo ""
     else
         echo "[ERROR] The file \"$JAVA_FILE\" is missing."
         exit
@@ -114,7 +114,7 @@ echo "#####################################"
     
     if [ ! -d $HOME/$AUTOPSY_DIR ]; then
 
-        if [ ! -e ./$AUTOPSY_FILE ] ; then
+        if [ ! -f ./$AUTOPSY_FILE ] ; then
             echo "[INFO.] Downloading the file \"$AUTOPSY_FILE\"..."
             wget https://github.com/sleuthkit/autopsy/releases/download/$AUTOPSY_DIR/$AUTOPSY_FILE || exit
             echo "Done."
@@ -127,15 +127,33 @@ echo "#####################################"
         echo "Done."
         echo ""
         
-# # no longer needed:
-#         if [ -e ./restart-solr.sh ] ; then
-#             echo "[INFO.] Installing \"restart-solr.sh\" script..."
-#             cp ./restart-solr.sh $HOME/$AUTOPSY_DIR/autopsy/solr/
-#             chmod +x $HOME/$AUTOPSY_DIR/autopsy/solr/restart-solr.sh
-#             echo "Done."
-#         else
-#             echo "[WARN.] The script \"restart-solr.sh\" is missing!"
-#         fi
+        # create shortcut on Desktop with support for different localization 
+        SHORTCUT="$(xdg-user-dir DESKTOP)/$AUTOPSY_DIR.desktop"
+        
+        if [ ! -f $SHORTCUT ] ; then
+            echo "[INFO.] Adding shortcut..."
+                        
+            echo "[Desktop Entry]" 2>&1 | tee $SHORTCUT
+            echo "Encoding=UTF-8" 2>&1 | tee  --append $SHORTCUT
+            echo "Version=$AUTOPSY_VERSION" 2>&1 | tee  --append $SHORTCUT
+            echo "Name=Autopsy $AUTOPSY_VERSION" 2>&1 | tee  --append $SHORTCUT
+            echo "GenericName=Autopsy $AUTOPSY_VERSION" 2>&1 | tee  --append $SHORTCUT
+            echo "Comment=Autopsy Forensic Browser" 2>&1 | tee  --append $SHORTCUT
+            echo "Type=Application" 2>&1 | tee  --append $SHORTCUT
+            echo "Exec=$HOME/$AUTOPSY_DIR/bin/autopsy" 2>&1 | tee  --append $SHORTCUT
+            echo "Icon=$HOME/$AUTOPSY_DIR/icon.ico" 2>&1 | tee  --append $SHORTCUT
+            echo "Terminal=false" 2>&1 | tee  --append $SHORTCUT
+            echo "" 2>&1 | tee  --append $SHORTCUT
+            echo "Categories=System;" 2>&1 | tee  --append $SHORTCUT
+            echo "Keywords=forensics;recovery;investigation;" 2>&1 | tee  --append $SHORTCUT
+            
+            # TODO add mime type
+            # MimeType=application/xml-autopsy;
+            # .mime.types
+            # application/autopsy                             aut
+            
+            cp $SHORTCUT $HOME/.local/share/applications
+        fi
         
     else
         echo "[WARN.] \"$HOME/$AUTOPSY_DIR\" already exists!"
